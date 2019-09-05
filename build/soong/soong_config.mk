@@ -1,8 +1,7 @@
 add_json_str_omitempty = $(if $(strip $(2)),$(call add_json_str, $(1), $(2)))
 add_json_val_default = $(call add_json_val, $(1), $(if $(strip $(2)), $(2), $(3)))
 
-# Insert new variables inside the Dot structure
-_contents := $(_contents)    "Dot":{$(newline)
+_json_contents := $(_json_contents)    "Dot":{$(newline)
 
 # See build/core/soong_config.mk for the add_json_* functions you can use here.
 $(call add_json_str_omitempty, Additional_gralloc_10_usage_bits, $(TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS))
@@ -24,6 +23,6 @@ $(call add_json_bool, Uses_metadata_as_fde_key, $(filter true,$(TARGET_USES_META
 $(call add_json_bool, Uses_nvidia_enhancements, $(filter TRUE,$(NV_ANDROID_FRAMEWORK_ENHANCEMENTS)))
 
 # This causes the build system to strip out the last comma in our nested struct, to keep the JSON valid.
-_contents := $(_contents)__SV_END
+_json_contents := $(_json_contents)__SV_END
 
-_contents := $(_contents)    },$(newline)
+_json_contents := $(_json_contents)    },$(newline)
