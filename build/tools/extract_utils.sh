@@ -513,6 +513,12 @@ function write_makefile_packages() {
 
         BASENAME=$(basename "$FILE")
         EXTENSION=${BASENAME##*.}
+        EXTENSION="."$EXTENSION
+        if [ "$EXTENSION" = ".jar" ]; then
+                EXTENSION="\$(COMMON_JAVA_PACKAGE_SUFFIX)"
+        elif [ "$EXTENSION" = ".apk" ]; then
+                EXTENSION="\$(COMMON_ANDROID_PACKAGE_SUFFIX)"
+        fi
         PKGNAME=${BASENAME%.*}
 
         # Add to final package list
@@ -596,7 +602,7 @@ function write_makefile_packages() {
             printf 'LOCAL_DEX_PREOPT := false\n'
         fi
         if [ ! -z "$EXTENSION" ]; then
-            printf 'LOCAL_MODULE_SUFFIX := .%s\n' "$EXTENSION"
+            printf 'LOCAL_MODULE_SUFFIX := %s\n' "$EXTENSION"
         fi
         if [ "$EXTRA" = "priv-app" ]; then
             printf 'LOCAL_PRIVILEGED_MODULE := true\n'
