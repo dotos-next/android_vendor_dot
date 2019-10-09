@@ -48,8 +48,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Turbo \
     turbo.xml \
-    privapp-permissions-turbo.xml		
-	
+    privapp-permissions-turbo.xml
+
 # Markup libs
 PRODUCT_COPY_FILES += \
     vendor/dot/prebuilt/common/lib/libsketchology_native.so:system/lib/libsketchology_native.so \
@@ -57,24 +57,16 @@ PRODUCT_COPY_FILES += \
 
 # Pixel sysconfig
 PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xml	
-	
-# init.d support
-PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner
-
-# dotOS-specific init file
-PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/etc/init.local.rc:root/init.dot.rc
-
-# systemupdates init file
-PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/etc/init.systemupdates.rc:system/etc/init/init.systemupdates.rc
+    vendor/dot/prebuilt/common/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xm
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
     vendor/dot/prebuilt/common/media/LMspeed_508.emd:system/media/LMspeed_508.emd \
     vendor/dot/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
+
+# Copy all custom init rc files
+$(foreach f,$(wildcard vendor/dot/prebuilt/common/etc/init/*.rc),\
+    $(eval PRODUCT_COPY_FILES += $(f):system/etc/init/$(notdir $f)))
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
@@ -120,7 +112,7 @@ else
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.adb.secure=1
 endif
 
-	
+
 # Include SDCLANG definitions if it is requested and available
 #ifeq ($(HOST_OS),linux)
 #    ifneq ($(wildcard vendor/qcom/sdclang-4.0/),)
