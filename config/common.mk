@@ -36,69 +36,6 @@ DEVICE_PACKAGE_OVERLAYS += \
     vendor/dot/overlay/common \
     vendor/dot/overlay/dictionaries
 
-
-# Themes
-# Accents
-PRODUCT_PACKAGES += \
-    PixelTheme \
-    AmberAccent \
-    BlueAccent \
-    BlueGreyAccent \
-    BrownAccent \
-    CyanAccent \
-    CandyRedAccent \
-    DeepOrangeAccent \
-    DeepPurpleAccent \
-    ExtendedGreenAccent \
-    GreenAccent \
-    GreyAccent \
-    IndigoAccent \
-    JadeGreenAccent \
-    LightBlueAccent \
-    LightGreenAccent \
-    LimeAccent \
-    OrangeAccent \
-    PaleBlueAccent \
-    PaleRedAccent \
-    PinkAccent \
-    PurpleAccent \
-    RedAccent \
-    TealAccent \
-    YellowAccent
-
-# UI Variants
-PRODUCT_PACKAGES += \
-    SystemDarkTheme \
-    SettingsDarkTheme \
-    SystemUIDarkTheme \
-	WellbeingDarkTheme \
-    SystemBlackTheme \
-    SettingsBlackTheme \
-    SystemUIBlackTheme \
-	WellbeingBlackTheme \
-    SystemNeoThemeOverlay \
-    SystemUINeoThemeOverlay \
-    SettingsNeoThemeOverlay \
-    ContactsThemeBlack \
-    DialerThemeBlack \
-    FilesThemeBlack \
-    ContactsThemeDark \
-    DialerThemeDark \
-    FilesThemeDark \
-	WellbeingNeo \
-	XiaomiDozeNeo \
-    GoogleIconNeo
-
-# QS tile styles
-PRODUCT_PACKAGES += \
-    QStilesSquare \
-    QStilesRoundedSquare \
-    QStilesSquircle \
-    QStilesTearDrop \
-    QSTilesJustIcons \
-    QStilesCircleOutline \
-    QSTilesCircleGradient
-
 # EXT4/F2FS format script
 PRODUCT_COPY_FILES += \
     vendor/dot/prebuilt/common/bin/format.sh:install/bin/format.sh
@@ -111,14 +48,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Turbo \
     turbo.xml \
-    privapp-permissions-turbo.xml	
-
-# Weather
-PRODUCT_PACKAGES += \
-    WeatherClient
-
-PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/etc/permissions/org.pixelexperience.weather.client.xml:system/etc/permissions/org.pixelexperience.weather.client.xml	
+    privapp-permissions-turbo.xml		
 	
 # Markup libs
 PRODUCT_COPY_FILES += \
@@ -181,8 +111,6 @@ include vendor/dot/config/bootanimation.mk
 # Packages
 include vendor/dot/config/packages.mk
 
-# Fonts
-include vendor/dot/config/fonts.mk
 
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 # Disable ADB authentication

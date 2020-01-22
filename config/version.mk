@@ -13,7 +13,7 @@
 # limitations under the License.
 
 #dotOS Versioning :
-DOT_MOD_VERSION = v3.1.1
+DOT_MOD_VERSION = v4.0
 
 
 ifndef DOT_BUILD_TYPE
@@ -49,9 +49,9 @@ ifeq ($(DOT_NIGHTLY), true)
       IS_OFFICIAL=true
       DOT_BUILD_TYPE := NIGHTLY
 
-      PRODUCT_GENERIC_PROPERTIES += \
-      dot.updater.uri=https://raw.githubusercontent.com/DotOS/ota_config/dot-p/$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3).json \
-      dot.updater.uri.nightly=https://raw.githubusercontent.com/DotOS/ota_config/dot-p/$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)_nightly.json
+      # PRODUCT_GENERIC_PROPERTIES += \
+      # dot.updater.uri=https://raw.githubusercontent.com/DotOS/ota_config/dot-p/$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3).json \
+      # dot.updater.uri.nightly=https://raw.githubusercontent.com/DotOS/ota_config/dot-p/$(shell echo "$(TARGET_PRODUCT)" | cut -d'_' -f 2,3)_nightly.json
       
     endif
     ifneq ($(IS_OFFICIAL), true)
@@ -63,7 +63,7 @@ endif
 
 TARGET_PRODUCT_SHORT := $(subst dot_,,$(CUSTOM_BUILD))
 
-DOT_VERSION := dotOS-P-$(DOT_MOD_VERSION)-$(CURRENT_DEVICE)-$(DOT_BUILD_TYPE)-$(CUSTOM_BUILD_DATE)
+DOT_VERSION := dotOS-$(DOT_MOD_VERSION)-$(CURRENT_DEVICE)-$(DOT_BUILD_TYPE)-$(CUSTOM_BUILD_DATE)
 
 DOT_FINGERPRINT := dotOS/$(DOT_MOD_VERSION)/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(CUSTOM_BUILD_DATE)
 
