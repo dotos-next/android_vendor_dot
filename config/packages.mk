@@ -66,7 +66,3 @@ PRODUCT_PACKAGES += \
 # Charger images
 PRODUCT_PACKAGES += \
     charger_res_images
-
-#Font package
-PRODUCT_PACKAGES += \
-    Custom-Fonts

@@ -67,13 +67,11 @@ DOT_VERSION := dotOS-$(DOT_MOD_VERSION)-$(CURRENT_DEVICE)-$(DOT_BUILD_TYPE)-$(CU
 
 DOT_FINGERPRINT := dotOS/$(DOT_MOD_VERSION)/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(CUSTOM_BUILD_DATE)
 
-PRODUCT_GENERIC_PROPERTIES += \
-  ro.dot.version=$(DOT_VERSION) \
-  ro.dot.releasetype=$(DOT_BUILD_TYPE) \
-  ro.modversion=$(DOT_MOD_VERSION)
-
 DOT_DISPLAY_VERSION := DotOS-$(DOT_MOD_VERSION)-$(DOT_BUILD_TYPE)
 
-PRODUCT_GENERIC_PROPERTIES += \
+CUSTOM_PROPERTIES += \
+  ro.dot.version=$(DOT_VERSION) \
+  ro.dot.releasetype=$(DOT_BUILD_TYPE) \
+  ro.modversion=$(DOT_MOD_VERSION)\
   ro.dot.display.version=$(DOT_DISPLAY_VERSION)\
   ro.dot.fingerprint=$(DOT_FINGERPRINT)

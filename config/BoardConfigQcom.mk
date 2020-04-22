@@ -88,4 +88,3 @@ endif
 
 PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom-caf/$(QCOM_HARDWARE_VARIANT)
-endif

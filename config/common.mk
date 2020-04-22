@@ -34,18 +34,18 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 endif
 endif
 
+# Copy all custom init rc files
+$(foreach f,$(wildcard vendor/dot/prebuilt/common/etc/init/*.rc),\
+    $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
+
 # Device Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     vendor/dot/overlay/common \
     vendor/dot/overlay/dictionaries
 
-# EXT4/F2FS format script
-PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/bin/format.sh:install/bin/format.sh
-
 # Backup Services whitelist
 PRODUCT_COPY_FILES += \
-    vendor/dot/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
+    vendor/dot/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
 
 # Turbo
 PRODUCT_PACKAGES += \
@@ -55,29 +55,25 @@ PRODUCT_PACKAGES += \
 
 # Markup libs
 PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/lib/libsketchology_native.so:system/lib/libsketchology_native.so \
-    vendor/dot/prebuilt/common/lib64/libsketchology_native.so:system/lib64/libsketchology_native.so
+    vendor/dot/prebuilt/common/lib/libsketchology_native.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libsketchology_native.so \
+    vendor/dot/prebuilt/common/lib64/libsketchology_native.so:$(TARGET_COPY_OUT_SYSTEM)/lib64/libsketchology_native.so
 
 # Pixel sysconfig
 PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xm
+    vendor/dot/prebuilt/common/etc/sysconfig/pixel.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/pixel.xm
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
-    vendor/dot/prebuilt/common/media/LMspeed_508.emd:system/media/LMspeed_508.emd \
-    vendor/dot/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
-
-# Copy all custom init rc files
-$(foreach f,$(wildcard vendor/dot/prebuilt/common/etc/init/*.rc),\
-    $(eval PRODUCT_COPY_FILES += $(f):system/etc/init/$(notdir $f)))
+    vendor/dot/prebuilt/common/media/LMspeed_508.emd:$(TARGET_COPY_OUT_SYSTEM)/media/LMspeed_508.emd \
+    vendor/dot/prebuilt/common/media/PFFprec_600.emd:$(TARGET_COPY_OUT_SYSTEM)/media/PFFprec_600.emd
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+    vendor/dot/prebuilt/common/lib/content-types.properties:$(TARGET_COPY_OUT_SYSTEM)/lib/content-types.properties
 
 # Fix Dialer
 PRODUCT_COPY_FILES +=  \
-    vendor/dot/prebuilt/common/etc/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
+    vendor/dot/prebuilt/common/etc/sysconfig/dialer_experience.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/dialer_experience.xml
 
 # Enable Android Beam on all targets
 PRODUCT_COPY_FILES += \
@@ -85,11 +81,11 @@ PRODUCT_COPY_FILES += \
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
+    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.sip.voip.xml
 
 # Enable wireless Xbox 360 controller support
 PRODUCT_COPY_FILES += \
-    frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
+    frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/Vendor_045e_Product_0719.kl
 
 # Media
 PRODUCT_GENERIC_PROPERTIES += \
@@ -119,14 +115,8 @@ else
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.adb.secure=1
 endif
 
-
-# Include SDCLANG definitions if it is requested and available
-#ifeq ($(HOST_OS),linux)
-#    ifneq ($(wildcard vendor/qcom/sdclang-4.0/),)
-#        include vendor/dot/sdclang/sdclang.mk
-#    endif
-#endif
-
+# Don't compile SystemUITests
+EXCLUDE_SYSTEMUI_TESTS := true
 
 # Do not include art debug targets
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false

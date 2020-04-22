@@ -33,7 +33,8 @@ dot_generator {
     export_include_dirs: [
         "usr/include",
         "usr/include/audio/include/uapi",
-        "usr/techpack/audio/include"
+        "usr/techpack/audio/include",
+        "usr/audio/include/uapi"
     ],
 
     // Sources for dependency tracking
