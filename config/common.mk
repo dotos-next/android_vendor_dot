@@ -21,14 +21,17 @@ include vendor/dot/config/version.mk
 PRODUCT_COPY_FILES += \
     vendor/dot/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/dot/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/dot/prebuilt/common/bin/50-base.sh:system/addon.d/50-base.sh \
-    vendor/dot/prebuilt/common/bin/clean_cache.sh:system/bin/clean_cache.sh
+    vendor/dot/prebuilt/common/bin/50-base.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-base.sh
 
 ifneq ($(AB_OTA_PARTITIONS),)
 PRODUCT_COPY_FILES += \
-    vendor/dot/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
-    vendor/dot/prebuilt/common/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
-    vendor/dot/prebuilt/common/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
+    vendor/dot/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
+    vendor/dot/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
+    vendor/dot/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.ota.allow_downgrade=true
+endif
 endif
 
 # Device Overlays
